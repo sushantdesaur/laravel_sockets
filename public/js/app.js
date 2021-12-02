@@ -25571,6 +25571,9 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
   forceTLS: false,
   disableStats: true
 });
+window.Echo.channel('DemoChannel').listen('WebsocketDemoEvent', function (e) {
+  console.log(e);
+});
 
 /***/ }),
 
