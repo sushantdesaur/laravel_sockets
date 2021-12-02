@@ -22,10 +22,12 @@ class ChatsController extends Controller
     }
 
     // Sending messages
-    public function sendMessages(Request $request) {
-        auth()-user()->messages()->create([
+    public function sendMessage(Request $request) {
+        $message = auth()-user()->messages()->create([
             'message' => $request->message,
         ]);
+
+        broadcast(new MessageSent($message));
 
         return ['status'=> 'success'];
     }

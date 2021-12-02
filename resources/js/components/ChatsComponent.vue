@@ -48,12 +48,17 @@
         data() {
             return {
                 messages: [],
-                newMessage: ''
+                newMessage: '',
+                users: [],
             }
         },
-        
+
         created() {
             this.fetchMessages();
+            Echo.join('chat')
+            .listen('MessageSent', (event)=>{
+                this.messages.push(event.message);
+            })
         },
 
         methods: {
@@ -62,13 +67,15 @@
                     this.messages = response.data;
                 })
             },
+
             // Send message method
             sendMessage() {
                 this.messages.push({
                     user: this.user,
-                    message: this.newMessage,
-                })
-                axios.post(messages, {message: this.newMessage});
+                    message: this.newMessage
+                });
+
+                axios.post('messages', {message: this.newMessage});
                 this.newMessage = '';
             }
         }

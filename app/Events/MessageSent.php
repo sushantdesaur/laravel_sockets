@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use App\Message;
 
 class MessageSent implements ShouldBroadcast
 {
@@ -32,7 +33,7 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        // PresenceChannel is same as private channel but with extra functionality like who is on the channel
+        // PresenceChannel is same as private channel but with extra functionality like who is on the c
         return new PresenceChannel('chat');
     }
 }

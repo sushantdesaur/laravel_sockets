@@ -25,6 +25,6 @@ Route::get('/', function () {
 Route::get('/chats', 'ChatsController@index');
 
 Route::get('/messages', 'ChatsController@fetchMessages'); // Receive Messages
-Route::post('/messages', 'ChatsController@sendMessages'); // Send Messages
+Route::post('/messages', 'ChatsController@sendMessage'); // Send Messages
 
 
