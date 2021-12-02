@@ -18,3 +18,5 @@ Route::get('/', function () {
     broadcast(new WebsocketDemoEvent('some data'));
     return view('welcome');
 });
+
+Route::get('/chats', 'ChatsController@index');
