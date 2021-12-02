@@ -51,6 +51,7 @@
                 newMessage: ''
             }
         },
+        
         created() {
             this.fetchMessages();
         },
