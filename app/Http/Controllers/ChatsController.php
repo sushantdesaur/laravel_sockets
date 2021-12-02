@@ -10,7 +10,22 @@ class ChatsController extends Controller
     public function __construct() {
         $this->middleware('auth');
     }
+    
     public function index() {
         return view('chats');
+    }
+    
+    // Fetching messages
+    public function fetchMessages() {
+        return Message::with('user')->get();
+    }
+
+    // Sending messages
+    public function sendMessages(Request $request) {
+        auth()-user()->messages()->create([
+            'message' => $request->message,
+        ]);
+
+        return ['status'=> 'success'];
     }
 }
