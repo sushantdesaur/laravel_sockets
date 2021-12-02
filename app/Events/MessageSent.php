@@ -17,6 +17,7 @@ class MessageSent implements ShouldBroadcast
 
     // $messages needs to be public otherwise it will not send messages continuosly
     public $message;
+    
     /**
      * Create a new event instance.
      *

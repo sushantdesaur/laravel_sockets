@@ -57,7 +57,7 @@
             Echo.join('chat')
             .listen('MessageSent', (event)=>{
                 this.messages.push(event.message);
-            })
+            });
         },
 
         methods: {
