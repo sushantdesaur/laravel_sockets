@@ -15,14 +15,15 @@
                     </ul>
                 </div>
                 <input 
+                    @keydown="sendTypingEvent"
                     @keyup.enter="sendMessage"
                     v-model="newMessage" 
                     type="text" 
                     class="form-control" 
                     name="message" 
                     placeholder="Enter your message">
-                <span class="text-muted">user is typing...</span>
             </div>
+            <span class="text-muted" v-if="activeUser" >{{ activeUser.name }} is typing...</span>
         </div>
         <!-- Active Users -->
         <div class="col-4">
@@ -50,6 +51,8 @@
                 messages: [],
                 newMessage: '',
                 users: [],
+                activeUser: false,
+                typingTimer: false,
             }
         },
 
@@ -60,21 +63,30 @@
                 this.users = user;
                 // console.log('Here');
                 // console.log(user);
-            })
+                })
             .joining(user=>{
                 this.users.push(user);
                 // console.log('joining');
                 // console.log(user);
-            })
+                })
             .leaving(user=>{
                 this.users.filter(u => u.id != user.id)
                 // console.log('leaving');
                 // console.log(user);
-            })
-            .listen('MessageSent', (event)=>{
+                })
+            .listen('MessageSent', (event) => {
                 this.messages.push(event.message);
-            });
-        },
+                })
+            .listenForWhisper('typing', user => {
+                   this.activeUser = user;
+                    if(this.typingTimer) {
+                        clearTimeout(this.typingTimer);
+                    }
+                   this.typingTimer = setTimeout(() => {
+                       this.activeUser = false;
+                   }, 3000);
+                })
+            },
 
         methods: {
             fetchMessages() {
@@ -92,6 +104,12 @@
 
                 axios.post('messages', {message: this.newMessage});
                 this.newMessage = '';
+            },
+            
+            // User is typing event
+            sendTypingEvent() {
+                Echo.join('chat')
+                    .whisper('typing', this.user);
             }
         }
     }
