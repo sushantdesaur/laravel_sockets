@@ -6,12 +6,21 @@
                 <div class="card-header">Messages</div>
                 <div class="card-body p-0">
                     <ul class="list-unstyled" style="height:300px; overflow-y:scroll">
-                        <li class="p-2">
-                            <strong>Test-user</strong>
+                        <!-- Rendering each message as list item -->
+                        <li class="p-2" v-for="(message, index) in messages" :key="index">
+                            <strong>{{ message.user.name }}</strong>
+                            <!-- It will print username and message -->
+                            {{ message.message }}
                         </li>
                     </ul>
                 </div>
-                <input type="text" class="form-control" name="message" placeholder="Enter your message">
+                <input 
+                    @keyup.enter="sendMessage"
+                    v-model="newMessage" 
+                    type="text" 
+                    class="form-control" 
+                    name="message" 
+                    placeholder="Enter your message">
                 <span class="text-muted">user is typing...</span>
             </div>
         </div>
@@ -33,8 +42,34 @@
 
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
+
+        props:['user'], 
+
+        data() {
+            return {
+                messages: [],
+                newMessage: ''
+            }
+        },
+        created() {
+            this.fetchMessages();
+        },
+
+        methods: {
+            fetchMessages() {
+                axios.get('messages').then(response => {
+                    this.messages = response.data;
+                })
+            },
+            // Send message method
+            sendMessage() {
+                this.messages.push({
+                    user: this.user,
+                    message: this.newMessage,
+                })
+                axios.post(messages, {message: this.newMessage});
+                this.newMessage = '';
+            }
         }
     }
 </script>
