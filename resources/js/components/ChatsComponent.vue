@@ -49,7 +49,6 @@
             return {
                 messages: [],
                 newMessage: '',
-                users: [],
             }
         },
 

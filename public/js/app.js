@@ -1955,8 +1955,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       messages: [],
-      newMessage: '',
-      users: []
+      newMessage: ''
     };
   },
   created: function created() {
