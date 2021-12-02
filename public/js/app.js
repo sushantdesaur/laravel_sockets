@@ -43728,6 +43728,18 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-chat-scroll/dist/index.js":
+/*!****************************************************!*\
+  !*** ./node_modules/vue-chat-scroll/dist/index.js ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(e,n){ true?module.exports=n():undefined}(this,function(){"use strict";function o(e,n){var t=n||e.scrollHeight-e.clientHeight;"function"==typeof e.scroll?e.scroll({top:t}):e.scrollTop=t}function i(e,n){if(!1!==n.enabled)if(!1!==n.handlePrepend){var t=0===e.scrollTop&&s.has(e)&&e.scrollHeight-s.get(e);o(e,t),s.set(e,e.scrollHeight)}else o(e)}var r=function(){return(r=Object.assign||function(e){for(var n,t=1,o=arguments.length;t<o;t++)for(var i in n=arguments[t])Object.prototype.hasOwnProperty.call(n,i)&&(e[i]=n[i]);return e}).apply(this,arguments)},l={enabled:!0,handlePrepend:!1},c=new WeakMap,s=new WeakMap,n={inserted:function(e,n){var t=r(r({},l),n.value);i(e,t)},update:function(e,n){c.has(e)&&c.get(e).disconnect();var t=r(r({},l),n.value),o=new MutationObserver(function(){i(e,t)});o.observe(e,{childList:!0,subtree:!0}),c.set(e,o)}},e={install:function(e){e.directive("chat-scroll",n)}};return"undefined"!=typeof window&&window.Vue&&window.Vue.use(e),e});
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ChatsComponent.vue?vue&type=template&id=2bb55d4d&":
 /*!*****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/ChatsComponent.vue?vue&type=template&id=2bb55d4d& ***!
@@ -43752,6 +43764,7 @@ var render = function () {
           _c(
             "ul",
             {
+              directives: [{ name: "chat-scroll", rawName: "v-chat-scroll" }],
               staticClass: "list-unstyled",
               staticStyle: { height: "300px", "overflow-y": "scroll" },
             },
@@ -56052,9 +56065,13 @@ module.exports = function(module) {
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_chat_scroll__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-chat-scroll */ "./node_modules/vue-chat-scroll/dist/index.js");
+/* harmony import */ var vue_chat_scroll__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_chat_scroll__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -56063,6 +56080,9 @@ module.exports = function(module) {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+
+Vue.use(vue_chat_scroll__WEBPACK_IMPORTED_MODULE_0___default.a); // new Vue(...);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
